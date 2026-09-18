@@ -197,7 +197,6 @@ function Quiz({ state, save }: { state: QuizState | null; save: (state: QuizStat
       <section className="quizBody">
         <aside className="questionIndex"><span>QUESTION</span><b>{String(current.currentIndex + 1).padStart(2, '0')}</b><small>动态题路</small></aside>
         <div className="questionPanel">
-          <span className="eyebrow">{question.multiple ? `MULTIPLE · 最多选择 ${question.max} 项` : 'CHOOSE THE CLOSEST ONE'}</span>
           <h1>{question.prompt}</h1>
           <div className="optionList" role={question.multiple ? 'group' : 'radiogroup'}>
             {question.options.map((option, index) => {
@@ -409,16 +408,13 @@ function Result({ state, reset }: { state: QuizState | null; reset: () => void }
 
 function IdentitiesPage() {
   const [family, setFamily] = useState('ALL')
-  const [query, setQuery] = useState('')
   const filtered = identities.filter((identity) =>
-    (family === 'ALL' || identity.familyId === family) &&
-    (!query || identity.name.includes(query) || identity.summary.includes(query) || identity.longDescription.includes(query)))
+    family === 'ALL' || identity.familyId === family)
   return <Shell><main className="atlasPage">
     <section className="atlasHero"><span className="eyebrow">73 PLAYER PERSONALITIES</span><h1>人格图鉴</h1><p>这里收录了 73 种熟悉的二游生活切片。按兴趣浏览，点开任意人格，看看它有没有说中你。</p></section>
     <div className="atlasTools">
       <div className="familyTabs"><button className={family === 'ALL' ? 'active' : ''} onClick={() => setFamily('ALL')}>全部 <i>73</i></button>{Object.entries(familyMeta).map(([id, item]) =>
         <button key={id} className={family === id ? 'active' : ''} onClick={() => setFamily(id)}>{item.name}</button>)}</div>
-      <label><span>搜索人格</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="例如：本命 / 剧情 / 高难"/></label>
     </div>
     <section className="identityGrid">{filtered.map((identity) =>
       <Link key={identity.id} to={`/identity/${identity.id}`} className="atlasIdentity" style={{ '--a': identity.theme[0], '--b': identity.theme[1] } as React.CSSProperties}>
@@ -431,26 +427,19 @@ function IdentitiesPage() {
 function IdentityDetail() {
   const { id = '' } = useParams()
   const identity = identityById[id]
-  const [preview, setPreview] = useState(false)
   if (!identity) return <Navigate to="/identities" replace/>
   const related = identities.filter((item) => item.familyId === identity.familyId && item.id !== identity.id).slice(0, 4)
   return <Shell><main className="detailPage" style={{ '--a': identity.theme[0], '--b': identity.theme[1] } as React.CSSProperties}>
     <section className="detailHero">
       <div className="detailImage"><IdentityImage identity={identity} eager/></div>
-      <div className="detailCopy"><span className="eyebrow">{identity.familyName}</span><h1>{identity.name}</h1><blockquote>{identity.resonanceQuote}</blockquote><p>{identity.longDescription}</p><button className="outlineButton" onClick={() => setPreview(true)}>预览抽卡揭晓效果</button></div>
+      <div className="detailCopy"><span className="eyebrow">{identity.familyName}</span><h1>{identity.name}</h1><blockquote>{identity.resonanceQuote}</blockquote><p>{identity.longDescription}</p></div>
     </section>
     <section className="behaviorPanel">
       <header><span>PLAYER CHECKLIST</span><h2>你可能很熟悉这些瞬间</h2></header>
       <div>{identity.typicalBehaviors.map((behavior, index) => <article key={behavior}><b>{String(index + 1).padStart(2, '0')}</b><p>{behavior}</p></article>)}</div>
     </section>
     <section className="related"><div className="sectionTitle"><span>+</span><div><small>KEEP EXPLORING</small><h2>你也可能会喜欢</h2></div></div><div>{related.map((item) => <Link key={item.id} to={`/identity/${item.id}`}><IdentityImage identity={item} thumbnail/><span>{item.name}</span></Link>)}</div></section>
-    {preview && <PreviewReveal identity={identity} close={() => setPreview(false)}/>} 
   </main></Shell>
-}
-
-function PreviewReveal({ identity, close }: { identity: IdentityDefinition; close: () => void }) {
-  const evaluation: IdentityEvaluation = { identity, fit: 92, evidenceConfidence: .92, distinctEvidenceItems: 3, status: 'GOLD', rarity: 'gold', evidenceItems: [], rankScore: 92 }
-  return <div className="previewModal" role="dialog" aria-modal="true"><button className="modalClose" onClick={close}>×</button><div className="previewBurst"/><IdentityCard evaluation={evaluation}/><button className="revealContinue" onClick={close}>返回人格档案</button></div>
 }
 
 function Principles() {

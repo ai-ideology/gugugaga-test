@@ -237,6 +237,20 @@ body{font-weight:400}
 .detailCopy blockquote,.primaryReportCopy blockquote{font-weight:600}
 .resultEvidence p{font-weight:500}
 
+/* Exported poster follows the same hierarchy: names lead, descriptions read calmly. */
+.sharePoster header,.sharePoster>footer{font-weight:600}
+.posterCopy small{font-weight:600}
+.posterCopy h2{font-weight:800}
+.posterCopy blockquote{font-weight:600}
+.posterCopy p{font-weight:400}
+.posterBehaviors>strong,.posterTags>strong{font-weight:600}
+.posterBehaviors span{font-weight:400;line-height:1.5}
+.posterBehaviors span b{font-weight:600}
+.posterTags span{font-weight:500}
+
+/* With search removed, category tabs own the full atlas toolbar. */
+.atlasTools .familyTabs{flex-basis:100%}
+
 /* Chinese display headings need breathing room; avoid glyph collisions. */
 .atlasHero h1,.principlesHero h1{
   line-height:1.02;
