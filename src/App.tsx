@@ -93,7 +93,7 @@ function Home({ state, begin }: { state: QuizState | null; begin: (resume: boole
       </section>
       <section className="homeManifest">
         <article><i>01</i><h2>真正懂二游</h2><p>角色羁绊、抽卡取舍、长草回坑、高难配队、二创吃瓜，都来自真实游玩场景。</p></article>
-        <article><i>02</i><h2>结果不止一个</h2><p>金色卡是证据充分的核心人格，紫色卡是方向明显的共鸣人格，不强凑数量。</p></article>
+        <article><i>02</i><h2>结果不止一个</h2><p>S 是匹配度最高的一组核心人格，A 是匹配度次高的共鸣人格；字母只表示匹配层级，不代表人格优劣。</p></article>
         <article><i>03</i><h2>没玩过不扣分</h2><p>“游戏没有”和“不喜欢”被严格分开；佛系也不等于对游戏没有感情。</p></article>
       </section>
       <section className="homeAtlas">
@@ -338,7 +338,7 @@ function Reveal({ state, save }: { state: QuizState | null; save: (state: QuizSt
       </button>
       <div className="revealPrompt">{flipped ? <button className="revealContinue" disabled={collecting} onClick={advance}>{cardIndex === queue.length - 1 ? '收下并查看全部人格' : '收下，继续揭晓'} <span>→</span></button> : <span>点击立即翻开 · 3 秒后自动揭晓</span>}</div>
     </section> : <section className="revealGallery">
-      <div className="revealTitle"><span>PERSONALITY COLLECTION</span><h1>你的人格已经全部显现</h1><p>紫色是与你产生呼应的人格侧面，金色是这次最清晰的核心人格。</p></div>
+      <div className="revealTitle"><span>PERSONALITY COLLECTION</span><h1>你的人格已经全部显现</h1><p>S 是本次匹配度最高的一组核心人格，A 是匹配度次高的共鸣人格；只表示匹配层级，不代表人格优劣。</p></div>
       <div className="revealGalleryGrid">{queue.map((item) => <article className={item.rarity} key={item.identity.id}><div><IdentityImage identity={item.identity} eager thumbnail/><h2>{item.identity.name}</h2><i>{item.rarity === 'gold' ? 'S' : 'A'}</i></div></article>)}</div>
       <button className="revealContinue" onClick={finish}>打开完整人格档案 <span>→</span></button>
     </section>}

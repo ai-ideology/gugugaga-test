@@ -238,6 +238,7 @@ body{font-weight:400}
 .domainGrid>article>p,.principlesNote p{font-weight:400}
 .detailCopy blockquote,.primaryReportCopy blockquote{font-weight:600}
 .resultEvidence p{font-weight:500}
+.revealTitle p{max-width:760px;margin:0 auto;font-weight:400;line-height:1.65}
 
 /* Exported poster follows the same hierarchy: names lead, descriptions read calmly. */
 .sharePoster header,.sharePoster>footer{font-weight:600}
