@@ -195,7 +195,7 @@ function Quiz({ state, save }: { state: QuizState | null; save: (state: QuizStat
       </header>
       <div className="progressTrack"><i style={{ width: `${Math.max(3, progress)}%` }}/></div>
       <section className="quizBody">
-        <aside className="questionIndex"><span>{question.id}</span><b>{String(current.currentIndex + 1).padStart(2, '0')}</b><small>动态题路</small></aside>
+        <aside className="questionIndex"><span>QUESTION</span><b>{String(current.currentIndex + 1).padStart(2, '0')}</b><small>动态题路</small></aside>
         <div className="questionPanel">
           <span className="eyebrow">{question.multiple ? `MULTIPLE · 最多选择 ${question.max} 项` : 'CHOOSE THE CLOSEST ONE'}</span>
           <h1>{question.prompt}</h1>

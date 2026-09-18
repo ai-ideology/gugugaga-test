@@ -157,3 +157,48 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:4px solid var(-
 
 @media(max-width:1180px) and (min-width:761px){.revealCollected{left:16px;width:250px}.revealCollected>div{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.revealCollected span em{display:none}.revealCollected span b{font-size:22px}}
 @media(max-width:760px){.revealGallery{padding-inline:12px}.revealGalleryGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.revealGalleryGrid article,.revealGalleryGrid article.gold{padding:5px;box-shadow:5px 5px 0 var(--ink),8px 8px 0 var(--purple)}.revealGalleryGrid article.gold{box-shadow:5px 5px 0 var(--ink),8px 8px 0 var(--yellow)}.revealGalleryGrid h2{left:10px;right:42px;bottom:10px;font-size:15px}.revealGalleryGrid article>div>i{right:8px;top:7px;font-size:42px}}
+
+/* Mobile is a focused answering surface, not a scaled-down desktop poster. */
+@media(max-width:760px){
+  .heroCopy h1{font-size:clamp(43px,13vw,54px);letter-spacing:-.055em;line-height:1.02}
+  .heroCopy h1 em{margin-top:.18em;color:var(--pink);text-shadow:none;-webkit-text-stroke:0}
+
+  .quizHeader{height:54px;padding:0 10px;border-bottom-width:2px}
+  .quizBrand{gap:0;font-size:14px}
+  .quizHeader>button{min-height:36px;padding:6px 9px;border-width:2px;font-size:10px;box-shadow:3px 3px 0 var(--ink)}
+  .progressTrack{height:7px;border-bottom-width:2px}
+  .progressTrack i{border-right-width:2px}
+  .quizBody{width:calc(100% - 24px);gap:12px;padding:14px 0 76px}
+  .questionIndex{min-height:38px;height:38px;padding:7px 10px;border-width:2px;box-shadow:3px 3px 0 var(--ink)}
+  .questionIndex span{display:none}
+  .questionIndex b{font-size:17px;line-height:1}
+  .questionIndex b::before{content:'第 '}
+  .questionIndex b::after{content:' 题'}
+  .questionIndex small{font-size:9px}
+  .questionPanel>.eyebrow{padding:5px 7px;border-width:2px;font-size:9px;letter-spacing:.03em;transform:none}
+  .questionPanel h1{max-width:none;margin:12px 0 15px;font-size:clamp(19px,5.6vw,23px);line-height:1.35;letter-spacing:-.02em}
+  .optionList{gap:8px}
+  .optionList button{min-height:56px;padding:8px 9px;border-width:2px;grid-template-columns:31px 1fr 18px;gap:9px;box-shadow:none!important}
+  .optionList button:hover{transform:none;box-shadow:none!important}
+  .optionList button:active,.optionList button.active{transform:none;box-shadow:inset 0 0 0 2px var(--ink)!important}
+  .optionList button i{width:29px;height:29px;border-width:2px;font-size:10px}
+  .optionList button span{font-size:13px;line-height:1.42}
+  .optionList button b{font-size:13px}
+  .questionActions{position:sticky;z-index:11;bottom:49px;margin:12px -12px 0;padding:9px 12px;display:grid;grid-template-columns:1fr 1.45fr;gap:8px;background:rgba(255,253,245,.96);border-top:2px solid var(--ink);flex-direction:row}
+  .questionActions .previousButton,.questionActions .confirmButton{min-height:44px;padding:8px 10px;border-width:2px;box-shadow:none;font-size:12px}
+  .questionActions .previousButton:only-child{grid-column:1/-1;width:auto;justify-self:start}
+  .quizFooter{min-height:49px;height:49px;padding:7px 12px;border-top-width:2px}
+  .quizFooter small{font-size:15px}
+
+  .revealPage{border-width:3px}
+  .revealPage>header{min-height:52px;height:52px;padding:7px 10px;border-bottom-width:2px}
+  .revealRitual{min-height:calc(100svh - 52px);gap:10px;padding:16px 10px 22px}
+  .revealAtmosphere i{display:none}
+  .revealKind{padding:6px 11px;border-width:2px;box-shadow:3px 3px 0 var(--ink);font-size:11px}
+  .revealCardButton{width:auto;height:min(60svh,420px);max-width:78vw;aspect-ratio:2/3}
+  .revealCardBack,.revealCardFront{border-width:3px;box-shadow:7px 7px 0 var(--ink);border-radius:13px}
+  .revealFlip.purple .revealCardFront{box-shadow:7px 7px 0 var(--purple)}
+  .revealFlip.gold .revealCardFront{box-shadow:7px 7px 0 var(--yellow)}
+  .revealPrompt{min-height:52px}
+  .revealContinue{min-height:48px;padding:10px 16px;box-shadow:4px 4px 0 var(--ink)}
+}
