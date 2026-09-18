@@ -45,7 +45,7 @@ function ScrollTop() {
 function Shell({ children, quiet = false }: { children: React.ReactNode; quiet?: boolean }) {
   return <div className={`appShell ${quiet ? 'quiet' : ''}`}>
     {!quiet && <header className="siteHeader">
-      <Link className="siteBrand" to="/"><span><b>咕咕嘎嘎</b><small>二游玩家人格研究所</small></span></Link>
+      <Link className="siteBrand" to="/"><span><b>咕咕嘎嘎</b><small>二游玩家人格测试</small></span></Link>
       <nav aria-label="主导航">
         <Link to="/identities">人格图鉴</Link>
         <Link to="/principles">判定原理</Link>
@@ -197,7 +197,8 @@ function Quiz({ state, save }: { state: QuizState | null; save: (state: QuizStat
       <section className="quizBody">
         <aside className="questionIndex"><span>QUESTION</span><b>{String(current.currentIndex + 1).padStart(2, '0')}</b><small>动态题路</small></aside>
         <div className="questionPanel">
-          <h1>{question.prompt}</h1>
+          <h1><span className="questionNumberInline">{String(current.currentIndex + 1).padStart(2, '0')}</span>{question.prompt}</h1>
+          <p className="questionMeta">共 {question.options.length} 个选项 · {question.multiple ? `可选择 ${question.min}–${question.max} 项` : '选中后自动进入下一题'}</p>
           <div className="optionList" role={question.multiple ? 'group' : 'radiogroup'}>
             {question.options.map((option, index) => {
               const active = selectedList.includes(option.id)
@@ -393,7 +394,7 @@ function Result({ state, reset }: { state: QuizState | null; reset: () => void }
         <button className="textLink" onClick={reset}>清除记录，重新鉴定</button>
       </section>
       <div className="posterWrap"><div className="sharePoster" ref={posterRef} style={{ '--a': result.primary.identity.theme[0], '--b': result.primary.identity.theme[1] } as React.CSSProperties}>
-        <header><span>咕咕嘎嘎 · 二游玩家人格研究所</span><b>PERSONALITY ARCHIVE</b></header>
+        <header><span>咕咕嘎嘎 · 二游玩家人格测试</span><b>PERSONALITY ARCHIVE</b></header>
         <div className="posterMain">
           <div className="posterImage"><IdentityImage identity={result.primary.identity} eager/></div>
           <div className="posterCopy"><small>MY CORE PERSONALITY · 我的核心人格</small><h2>{result.primary.identity.name}</h2><blockquote>{result.primary.identity.resonanceQuote}</blockquote><p>{result.primary.identity.longDescription}</p></div>

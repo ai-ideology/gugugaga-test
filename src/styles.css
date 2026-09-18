@@ -223,6 +223,8 @@ body{font-weight:400}
   line-height:1.38;
   letter-spacing:-.025em;
 }
+.questionNumberInline{display:none}
+.questionMeta{margin:-22px 0 24px;color:#555;font-size:13px;font-weight:400;line-height:1.5}
 .optionList button{font-weight:400}
 .optionList button span{font-weight:400;line-height:1.62}
 .optionList button i,.optionList button b{font-weight:600}
@@ -267,8 +269,17 @@ body{font-weight:400}
 .atlasIdentity h2,.detailCopy h1,.behaviorPanel h2,.related h2{word-break:keep-all}
 
 @media(max-width:760px){
-  .questionPanel h1{margin:11px 0 14px;font-weight:600;line-height:1.42;letter-spacing:-.015em}
+  .quizBody{display:block;width:calc(100% - 24px);padding:12px 0 24px}
+  .questionIndex{display:none}
+  .questionPanel h1{margin:8px 0 7px;font-size:clamp(18px,5.2vw,21px);font-weight:600;line-height:1.4;letter-spacing:-.015em}
+  .questionNumberInline{display:inline-block;margin-right:.55em;color:#08777b;font-size:.78em;font-weight:700;letter-spacing:.02em;vertical-align:.08em}
+  .questionMeta{margin:0 0 10px;color:#666;font-size:11px;line-height:1.4}
+  .optionList{gap:7px}
+  .optionList button{min-height:50px;padding:6px 8px;grid-template-columns:29px 1fr 17px;gap:8px}
+  .optionList button i{width:27px;height:27px}
   .optionList button span{font-weight:400;line-height:1.5}
+  .questionActions{position:static;z-index:auto;bottom:auto;margin:11px 0 0;padding:9px 0 0;grid-template-columns:1fr 1.45fr;background:transparent;border-top:2px solid var(--ink)}
+  .quizFooter{display:none}
   .atlasHero h1,.principlesHero h1{line-height:1.08;letter-spacing:-.02em}
   .principlesHero h1{max-width:11ch}
   .detailCopy h1{line-height:1.1;letter-spacing:-.02em;margin:20px 0 26px}
