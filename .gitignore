@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.vite/
+playwright-report/
+test-results/
+*.tsbuildinfo
+debug.log
+/public/characters/
+.codex/
+AGENTS.md
+/img/
+/效果图/
+/theme/
+/doc-review-*/
+vite.config.js
+vite.config.d.ts
