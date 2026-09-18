@@ -202,3 +202,60 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:4px solid var(-
   .revealPrompt{min-height:52px}
   .revealContinue{min-height:48px;padding:10px 16px;box-shadow:4px 4px 0 var(--ink)}
 }
+
+/* Readability pass: expressive headings, calm body copy. */
+:root{
+  font-family:'Microsoft YaHei','Microsoft YaHei UI','PingFang SC','Noto Sans CJK SC','Source Han Sans SC',Arial,sans-serif;
+}
+body{font-weight:400}
+
+/* Keep navigation and action labels distinct without making every word heavy. */
+.siteHeader nav,.quizBrand,.quizHeader>button,.quizFooter button,
+.primaryButton,.outlineButton,.previousButton,.confirmButton{font-weight:600}
+
+/* Quiz content shares one alignment edge from prompt through answers. */
+.questionPanel{min-width:0;width:100%}
+.questionPanel h1{
+  width:100%;
+  max-width:none;
+  margin:24px 0 34px;
+  font-weight:600;
+  line-height:1.38;
+  letter-spacing:-.025em;
+}
+.optionList button{font-weight:400}
+.optionList button span{font-weight:400;line-height:1.62}
+.optionList button i,.optionList button b{font-weight:600}
+.quizStage b{font-weight:600}
+
+/* Reading copy should recede so headings and labels can provide hierarchy. */
+.heroCopy>p,.homeManifest p,.introLead p,.introRules p,
+.identityCardCopy p,.resultHero p,.primaryReportCopy>p,
+.atlasHero p,.principlesHero p,.atlasIdentity p,.detailCopy>p,
+.behaviorPanel article p,.detailFacts p,.engineFlow p,
+.domainGrid>article>p,.principlesNote p{font-weight:400}
+.detailCopy blockquote,.primaryReportCopy blockquote{font-weight:600}
+.resultEvidence p{font-weight:500}
+
+/* Chinese display headings need breathing room; avoid glyph collisions. */
+.atlasHero h1,.principlesHero h1{
+  line-height:1.02;
+  letter-spacing:-.035em;
+  text-wrap:balance;
+}
+.principlesHero h1{max-width:13ch}
+.detailCopy h1{
+  line-height:1.04;
+  letter-spacing:-.035em;
+  margin:24px 0 34px;
+  text-wrap:balance;
+}
+.atlasIdentity h2,.detailCopy h1,.behaviorPanel h2,.related h2{word-break:keep-all}
+
+@media(max-width:760px){
+  .questionPanel h1{margin:11px 0 14px;font-weight:600;line-height:1.42;letter-spacing:-.015em}
+  .optionList button span{font-weight:400;line-height:1.5}
+  .atlasHero h1,.principlesHero h1{line-height:1.08;letter-spacing:-.02em}
+  .principlesHero h1{max-width:11ch}
+  .detailCopy h1{line-height:1.1;letter-spacing:-.02em;margin:20px 0 26px}
+}
