@@ -38,9 +38,9 @@ async function finishAdaptiveQuiz(page: Page) {
 
 test('runs the adaptive test, reveal, result, and refresh restore', async ({ page }) => {
   await enterQuiz(page)
-  await expect(page.getByText('G01', { exact: true })).toBeVisible()
+  await expect(page.locator('.questionNumberInline')).toHaveText('01')
   await answerCurrent(page)
-  await expect(page.getByText('G02', { exact: true })).toBeVisible()
+  await expect(page.locator('.questionNumberInline')).toHaveText('02')
   await page.getByRole('button', { name: '暂存并返回' }).click()
   await page.getByRole('button', { name: /继续人格测试/ }).click()
   await finishAdaptiveQuiz(page)
@@ -60,12 +60,14 @@ test('runs the adaptive test, reveal, result, and refresh restore', async ({ pag
   const poster = page.locator('.sharePoster')
   await expect(poster).not.toContainText(/F\d{2}/)
   await expect(poster.locator('.posterCopy > p')).not.toBeEmpty()
-  await expect(poster.locator('.posterBehaviors > span')).toHaveCount(3)
+  await expect(poster.locator('.posterBehaviors, .posterTags')).toHaveCount(0)
+  await expect(poster.locator('.posterCardGrid article')).not.toHaveCount(0)
+  await expect(poster.locator('.posterCardGrid article i').first()).toContainText(/S|A/)
   expect(await poster.evaluate((element) => {
     const rect = element.getBoundingClientRect()
     return { width: rect.width, height: rect.height }
   })).toEqual({ width: 1200, height: 1600 })
-  expect(await poster.locator('.posterImage img').evaluate((element) => getComputedStyle(element).objectFit)).toBe('contain')
+  expect(await poster.locator('.posterImage img').evaluate((element) => getComputedStyle(element).objectFit)).toBe('cover')
   await page.reload()
   await expect(page.getByRole('heading', { name: /你的人格档案/ })).toBeVisible()
 })
@@ -79,9 +81,9 @@ test('keeps NONE exclusive in multiselect and supports backtracking', async ({ p
   await expect(checks.nth(0)).toHaveAttribute('aria-checked', 'false')
   await expect(checks.last()).toHaveAttribute('aria-checked', 'true')
   await page.getByRole('button', { name: /确认这 1 项/ }).click()
-  await expect(page.getByText('G02', { exact: true })).toBeVisible()
+  await expect(page.locator('.questionNumberInline')).toHaveText('02')
   await page.getByRole('button', { name: /上一题/ }).click()
-  await expect(page.getByText('G01', { exact: true })).toBeVisible()
+  await expect(page.locator('.questionNumberInline')).toHaveText('01')
 })
 
 test('shows 73 identity archives and opens details', async ({ page }) => {
@@ -93,8 +95,7 @@ test('shows 73 identity archives and opens details', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '本命真爱党' })).toBeVisible()
   await expect(page.locator('.detailImage img')).toBeVisible()
   await expect(page.locator('.detailImage > span')).toHaveCount(0)
-  await page.getByRole('button', { name: /预览抽卡揭晓/ }).click()
-  await expect(page.locator('.previewModal .identityCard')).toBeVisible()
+  await expect(page.getByRole('button', { name: /预览抽卡揭晓/ })).toHaveCount(0)
 })
 
 test('explains the result model in player-facing language', async ({ page }) => {

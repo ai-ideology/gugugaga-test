@@ -364,6 +364,13 @@ function Result({ state, reset }: { state: QuizState | null; reset: () => void }
   }
 
   const coreCards = result.gold.length ? result.gold : [result.primary]
+  const coreIds = new Set(coreCards.map((item) => item.identity.id))
+  const posterCards = [
+    ...coreCards.map((item) => ({ ...item, rank: 'S' as const })),
+    ...result.purple
+      .filter((item) => !coreIds.has(item.identity.id))
+      .map((item) => ({ ...item, rank: 'A' as const })),
+  ]
   return <Shell>
     <main className="resultPage">
       <section className="resultHero">
@@ -396,11 +403,15 @@ function Result({ state, reset }: { state: QuizState | null; reset: () => void }
       <div className="posterWrap"><div className="sharePoster" ref={posterRef} style={{ '--a': result.primary.identity.theme[0], '--b': result.primary.identity.theme[1] } as React.CSSProperties}>
         <header><span>咕咕嘎嘎 · 二游玩家人格测试</span><b>PERSONALITY ARCHIVE</b></header>
         <div className="posterMain">
-          <div className="posterImage"><IdentityImage identity={result.primary.identity} eager/></div>
-          <div className="posterCopy"><small>MY CORE PERSONALITY · 我的核心人格</small><h2>{result.primary.identity.name}</h2><blockquote>{result.primary.identity.resonanceQuote}</blockquote><p>{result.primary.identity.longDescription}</p></div>
+          <div className="posterImage"><IdentityImage identity={result.primary.identity} eager/><i>S</i></div>
+          <div className="posterCopy"><small>MY PRIMARY PERSONALITY · 我的主人格</small><h2>{result.primary.identity.name}</h2><blockquote>{result.primary.identity.resonanceQuote}</blockquote><p>S 是本次和你匹配度最高的一组核心人格，A 是匹配度次高的共鸣人格，不代表稀有程度。</p></div>
         </div>
-        <div className="posterBehaviors"><strong>你可能很熟悉这些瞬间</strong>{result.primary.identity.typicalBehaviors.map((behavior, index) => <span key={behavior}><b>{String(index + 1).padStart(2, '0')}</b>{behavior}</span>)}</div>
-        <div className="posterTags"><strong>与你共鸣</strong>{coreCards.slice(1, 4).map((item) => <span key={item.identity.id}>{item.identity.name}</span>)}{result.purple.slice(0, 3).map((item) => <span key={item.identity.id}>{item.identity.name}</span>)}</div>
+        <section className={`posterCollection count-${Math.min(posterCards.length, 13)}`}>
+          <div className="posterCollectionTitle"><span>MY PERSONALITY COLLECTION</span><h3>我的人格阵容</h3><b>{coreCards.length} 个核心人格 · {posterCards.length - coreCards.length} 个共鸣人格</b></div>
+          <div className="posterCardGrid">{posterCards.map((item) => <article className={item.rank === 'S' ? 'rank-s' : 'rank-a'} key={item.identity.id}>
+            <div><IdentityImage identity={item.identity} eager thumbnail/><i>{item.rank}</i><h4>{item.identity.name}</h4></div>
+          </article>)}</div>
+        </section>
         <footer><span>73 PLAYER PERSONALITIES</span><span>GUGUGAGA 2026</span></footer>
       </div></div>
     </main>
